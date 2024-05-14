@@ -18,7 +18,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://www.digidis.tn/">
         Digidis
       </Link>{' '}
       {new Date().getFullYear()}
@@ -49,10 +49,8 @@ export default function SignInSide() {
           md={7}
           sx={{
             backgroundImage: `url(${LoginImage})`,
-           height:'100%',
-           
-        
-            
+            height:'100%',
+          
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>

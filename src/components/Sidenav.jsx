@@ -12,11 +12,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import {Login,AttachMoney,AddShoppingCart,Storefront, Analytics as AnalyticsIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../appStore';
-
 
 
 const drawerWidth = 240;
@@ -51,8 +49,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-
-
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
@@ -69,27 +65,35 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   }),
 );
+
+const routes = {
+  '/VenteRevenue': { name: 'Vente & Revenue',icon: <AnalyticsIcon /> }, 
+  '/InventairePoduit': { name: 'Inventaire & produit', icon: <Storefront /> },
+  '/CommandeActivite': { name: 'Commande & Activité', icon: <AddShoppingCart /> },
+  '/promotionProduction': { name: 'Promotion & Production', icon: <AttachMoney /> },
+  '/login': { name: 'Login', icon: <Login /> },
+};
+
 export default function Sidenav() {
   const theme = useTheme();
- // const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
   const open = useAppStore((state) => state.dopen);
+
   return (
     <Box sx={{ display: 'flex' }}>
-
       <CssBaseline />
-      <Box height={30}/>
+      <Box height={30} />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton >
+          <IconButton>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
 
         <Divider />
         <List>
-          {['All mail'].map((text, index) => (
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/")}}>
+          {Object.entries(routes).map(([path, { name, icon }]) => (
+            <ListItem disablePadding key={path} sx={{ display: 'block' }} onClick={() => navigate(path)}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -97,119 +101,18 @@ export default function Sidenav() {
                   px: 1,
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>
+                  {icon}
                 </ListItemIcon>
-                <ListItemText primary= "Home" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <List>
-          {['All mail'].map((text, index) => (
-            <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/PerfermenceDesVentes")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 1,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary= "Perfermance des Ventes" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          {['All mail'].map((text, index) => (
-            <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/PerfermanceParProduit")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 1,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary= "Perfermance par produit" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          {['All mail'].map((text, index) => (
-            <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/AnalyseClientFournisseur")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 1,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary= "Clients et Fournisseurs" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          {['All mail'].map((text, index) => (
-            <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/login")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 1,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary= "Login" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      
       </Drawer>
-     
     </Box>
   );
 }
+
+
+

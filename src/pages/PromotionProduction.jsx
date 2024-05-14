@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import DrawerHeader from '../components/Sidenav'
 import Navbar from '../components/Navbar';
-export default function AnalyseClientFournisseur() {
+export default function VenteRevenue() {
   return (
     <>
     <div className='bgcolor'>
