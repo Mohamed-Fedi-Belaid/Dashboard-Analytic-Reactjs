@@ -22,6 +22,10 @@ import axios from 'axios';
 import GeoChart from '../charts/GeoChart';
 import Footer from '../components/Footer';
 import { LineChart } from '../charts/LineChart';
+import { ColumnChart1 } from '../charts/ColumnCahrt1';
+import TunisiaMap from '../charts/TunisiaMap';
+import { Bar2 } from '../charts/Bar2';
+
 export default function VenteRevenue() {
   
   const [dataProfit, setDataProfit] = useState(null);
@@ -83,6 +87,40 @@ export default function VenteRevenue() {
 
     fetchData();
   }, []);
+
+
+  const [dataRepartitionArticleParSousCategorie, setDataRepartitionArticleParSousCategorie] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseRepartitionArticleParSousCategorie = await axios.get('http://localhost:9000/api/v1/article/getRepartitionArticleParSousCategorie');
+
+        setDataRepartitionArticleParSousCategorie(responseRepartitionArticleParSousCategorie.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  const [dataSommeVenteParMois, setDataSommeVenteParMois] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseSommeVenteParMois = await axios.get('http://localhost:9000/api/v1/detailCommande/getSommeVenteParMois');
+
+        setDataSommeVenteParMois(responseSommeVenteParMois.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
 
 
   return (
@@ -187,35 +225,37 @@ export default function VenteRevenue() {
               <Box height={20}/>
 
               <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                       <Card sx={{ height: 60 + "vh" }}>  
                             <CardContent>
-                              <GeoChart />
+                            
                             </CardContent>
                       </Card>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                       <Card sx={{ height: 60 + "vh" }}>  
-                            <CardContent>
+                      <CardContent>
+                              <Bar2 dataSommeVenteParMois={dataSommeVenteParMois}>
                               
-                            </CardContent>
+                              </Bar2>
+                      </CardContent>
+                           
                       </Card>
                 </Grid> 
               </Grid> 
               <Grid container spacing={2}>
-                <Grid item xs={8}>
+                <Grid item xs={6}>
                       <Card sx={{ height: 60 + "vh" }}>  
-                            <CardContent>
-                              <LineChart />
-
-                            </CardContent>
+                            <ColumnChart1 dataRepartitionArticleParSousCategorie={dataRepartitionArticleParSousCategorie}> 
+                            
+                            </ColumnChart1>
                       </Card>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                       <Card sx={{ height: 60 + "vh" }}>  
-                            <CardContent>
+                            <TunisiaMap  >
                               
-                            </CardContent>
+                            </TunisiaMap>
                       </Card>
                 </Grid> 
               </Grid>

@@ -28,9 +28,9 @@ export default function CommandeActivite() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseNbTotalCommande = await axios.get('http://');
-        console.log(responseNbTotalCommande);
-        setDataNbTotalCommande(responseNbTotalCommande);
+        const responseNbTotalCommande = await axios.get('http://localhost:9000/api/v1/commande/countAll');
+        console.log(responseNbTotalCommande.data);
+        setDataNbTotalCommande(responseNbTotalCommande.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -44,9 +44,9 @@ export default function CommandeActivite() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseNbCategorie = await axios.get('http://');
-        console.log(responseNbCategorie);
-        setDataNbCategorie(responseNbCategorie);
+        const responseNbCategorie = await axios.get('http://localhost:9000/api/v1/categorie/count');
+        console.log(responseNbCategorie.data);
+        setDataNbCategorie(responseNbCategorie.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

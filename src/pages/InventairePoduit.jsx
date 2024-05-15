@@ -22,6 +22,8 @@ import axios from 'axios';
 import GeoChart from '../charts/GeoChart';
 import Footer from '../components/Footer';
 import { LineChart } from '../charts/LineChart';
+import { Bar } from '../charts/Bar';
+import { Bar1 } from '../charts/Bar1';
 export default function InventairePoduit() {
   
  
@@ -136,6 +138,40 @@ export default function InventairePoduit() {
     fetchData();
   }, []);
 
+  const [dataNbArticleVenduParSaison, setDataNbArticleVenduParSaison] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseNbArticleVenduParSaison = await axios.get('http://localhost:9000/api/v1/detailCommande/getNbArticleVenduParSaison');
+        console.log(responseNbArticleVenduParSaison.data);
+        setDataNbArticleVenduParSaison(responseNbArticleVenduParSaison.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  const [dataRepartitionArticleParCategorie, setDataRepartitionArticleParCategorie] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseRepartitionArticleParCategorie = await axios.get('http://localhost:9000/api/v1/article/getArticleCountByCategorie');
+        console.log(responseRepartitionArticleParCategorie.data);
+        setDataRepartitionArticleParCategorie(responseRepartitionArticleParCategorie.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
 
   return (
     <>
@@ -227,17 +263,18 @@ export default function InventairePoduit() {
                 <Box height={20}/>
 
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                           <Card sx={{ height: 75 + "vh" }}>  
                                 <CardContent>
-                                  
+                                  <Bar dataNbArticleVenduParSaison={dataNbArticleVenduParSaison}/>
+
                                 </CardContent>
                           </Card>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={8}>
                           <Card sx={{ height: 75 + "vh" }}>  
                                 <CardContent>
-                                  
+                                <Bar1 dataRepartitionArticleParCategorie={dataRepartitionArticleParCategorie} />
                                 </CardContent>
                           </Card>
                     </Grid> 

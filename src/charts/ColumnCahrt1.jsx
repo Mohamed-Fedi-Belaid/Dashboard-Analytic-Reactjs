@@ -2,34 +2,37 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 
 
-export function ColumnChart({ dataNbVenteParCategorie = [] }) {
+
+export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
   const [listVar, setListVar] = useState([]);
 
   useEffect(() => {
-    if (dataNbVenteParCategorie) {
+    if (dataRepartitionArticleParSousCategorie) {
       const newListVar = [];
-      for (let i = 0; i < dataNbVenteParCategorie.length; i++) {
-        console.log(dataNbVenteParCategorie[i]);
+      for (let i = 0; i < dataRepartitionArticleParSousCategorie.length; i++) {
+        console.log(dataRepartitionArticleParSousCategorie[i]);
         newListVar.push([
-          dataNbVenteParCategorie[i].nom,
-          dataNbVenteParCategorie[i].SommeVente,
+           
+            dataRepartitionArticleParSousCategorie[i].nom,
+            dataRepartitionArticleParSousCategorie[i].sum,
           "#ff907a",
         ]);
       }
       console.log(newListVar)
       setListVar(newListVar);
     }
-  }, [dataNbVenteParCategorie]);
+  }, [dataRepartitionArticleParSousCategorie]);
 
   const data = [["Element", "Nombre de vente", { role: "style" }], ...listVar];
   const options = {
+    title:"Répartition des articles par sous catégorie",
     bar: { groupWidth: "80%" },
   };
 
   return (
-    dataNbVenteParCategorie && <Chart
+    dataRepartitionArticleParSousCategorie && <Chart
       chartType="ColumnChart"
-      width="1000px"
+      width="600px"
       height="300px"
       data={data}
       options={options}
