@@ -12,10 +12,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import {Login,AttachMoney,AddShoppingCart,Storefront, Analytics as AnalyticsIcon } from '@mui/icons-material';
+import { Login, AttachMoney, AddShoppingCart, Storefront, Analytics as AnalyticsIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../appStore';
-
 
 const drawerWidth = 240;
 
@@ -67,10 +66,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const routes = {
-  '/VenteRevenue': { name: 'Vente & Revenue',icon: <AnalyticsIcon /> }, 
+  '/VenteRevenue': { name: 'Vente & Revenue', icon: <AnalyticsIcon /> }, 
   '/InventairePoduit': { name: 'Inventaire & produit', icon: <Storefront /> },
   '/CommandeActivite': { name: 'Commande & Activité', icon: <AddShoppingCart /> },
   '/promotionProduction': { name: 'Promotion & Production', icon: <AttachMoney /> },
+  '/ClassificationArticle': { name: 'Classification des Articles', icon: <AttachMoney /> },
   '/login': { name: 'Login', icon: <Login /> },
 };
 
@@ -104,7 +104,7 @@ export default function Sidenav() {
                 <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>
                   {icon}
                 </ListItemIcon>
-                <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={name} sx={{ opacity: open ? 1 : 0, ml: -2 }} />
               </ListItemButton>
             </ListItem>
           ))}
@@ -113,6 +113,3 @@ export default function Sidenav() {
     </Box>
   );
 }
-
-
-

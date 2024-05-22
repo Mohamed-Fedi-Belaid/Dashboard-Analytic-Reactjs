@@ -123,6 +123,22 @@ export default function VenteRevenue() {
 
 
 
+  const [dataSommeVenteParVille, setDataSommeVenteParVille] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseSommeVenteParVille = await axios.get('http://localhost:9000/api/v1/detailCommande/getSommeVenteParVille');
+        console.log(responseSommeVenteParVille.data);
+        
+        setDataSommeVenteParVille(responseSommeVenteParVille.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
     <div className='bgcolor'>

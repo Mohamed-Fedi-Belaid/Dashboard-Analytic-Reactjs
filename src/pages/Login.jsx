@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,35 +13,56 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoginImage from '../../src/assets/LoginImage.png';
+import { useNavigate } from 'react-router-dom';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.digidis.tn/">
-        Digidis
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
+
 
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
+export default function Login() {
+  
+  
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email');
+    const password = data.get('password');
+
+    try {
+      const response = await fetch('http://localhost:9000/api/v1/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      localStorage.setItem('token', responseData.token);
+
+      // Redirigez l'utilisateur vers la page VenteRevenue après une connexion réussie
+      navigate('/VenteRevenue'); // Utilisez useNavigate pour la redirection
+    } catch (error) {
+      console.error('Error:', error);
+      setError(true);
+    }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -49,8 +70,7 @@ export default function SignInSide() {
           md={7}
           sx={{
             backgroundImage: `url(${LoginImage})`,
-            height:'100%',
-          
+            height: '100%',
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -109,7 +129,6 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>

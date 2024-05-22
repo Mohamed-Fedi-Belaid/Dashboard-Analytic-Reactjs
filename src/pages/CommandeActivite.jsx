@@ -70,6 +70,21 @@ export default function CommandeActivite() {
     fetchData();
   }, []);
   
+
+  const [dataArticleCountByCategory, setDataArticleCountByCategory] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseArticleCountByCategory = await axios.get('http://localhost:9000/api/v1/article/getArticleCountByCategorie');
+        console.log(responseArticleCountByCategory.data);
+        setDataArticleCountByCategory(responseArticleCountByCategory.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   
   
   
@@ -83,7 +98,6 @@ export default function CommandeActivite() {
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Stack spacing={2}> 
                     <Grid container spacing={2} >
-                      
                         <Grid item xs={4} >
                           <Stack spacing={2} direction={'row'} > 
                             <Stack spacing={2} direction="row" marginLeft={2}>
@@ -148,10 +162,10 @@ export default function CommandeActivite() {
                                   </CardContent>
                             </Card>
                       </Grid>
-                      <Grid item xs={4}>
-                                <Card sx={{minWidth: 104 + "%"  , height: 50 + "vh" }}>  
+                      <Grid item xs={8}>
+                                <Card sx={{minWidth: 104 + "%"  , height: 60 + "vh" }}>  
                                       <CardContent>
-                                        <PieChart/>
+                                        <PieChart dataArticleCountByCategory={dataArticleCountByCategory} />
                                       </CardContent>
                                 </Card>
                           </Grid>
