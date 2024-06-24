@@ -69,7 +69,7 @@ const routes = {
   '/VenteRevenue': { name: 'Vente & Revenue', icon: <AnalyticsIcon /> }, 
   '/InventairePoduit': { name: 'Inventaire & produit', icon: <Storefront /> },
   '/CommandeActivite': { name: 'Commande & Activité', icon: <AddShoppingCart /> },
-  '/promotionProduction': { name: 'Promotion & Production', icon: <AttachMoney /> },
+  
   '/ClassificationArticle': { name: 'Classification des Articles', icon: <AttachMoney /> },
   '/login': { name: 'Login', icon: <Login /> },
 };

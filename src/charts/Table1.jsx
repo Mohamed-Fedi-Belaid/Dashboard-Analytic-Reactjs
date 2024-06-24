@@ -16,25 +16,25 @@ const options = {
   showRowNumber: true,
 };
 
-export function TableFournisseur({dataMeilleurFournisseur}) {
+export function Table1({dataCAGR}) {
   const [listVar, setListVar] = useState([]);
 
   useEffect(() => {
-    if (dataMeilleurFournisseur) {
+    if (dataCAGR) {
       const newListVar = [];
-      for (let i = 0; i < dataMeilleurFournisseur.length; i++) {
-        console.log(dataMeilleurFournisseur[i]);
+      for (let i = 0; i < dataCAGR.length; i++) {
+        console.log(dataCAGR[i]);
         newListVar.push([
-            dataMeilleurFournisseur[i].fournisseur_name,
-            {v: dataMeilleurFournisseur[i].article_count, f:dataMeilleurFournisseur[i].article_count.toString()} ,
+            dataCAGR[i].nom,
+            {v: dataCAGR[i].CAGR, f:dataCAGR[i].CAGR.toString()} ,
         ]);
       }
 
       setListVar(newListVar);
     }
-  }, [dataMeilleurFournisseur]);
+  }, [dataCAGR]);
 
-  const data = [["Meilleur Fournisseur", "Somme des ventes"], ...listVar];
+  const data = [["Catégories", "CAGR"], ...listVar];
 
   const options = {
     allowHtml: true,

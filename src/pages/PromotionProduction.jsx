@@ -1,273 +1,246 @@
-import React from 'react'
-import Sidenav from '../components/Sidenav'
-import Navbar from '../components/Navbar'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import DrawerHeader from '../components/Sidenav'
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Stack from '@mui/material/Stack';
+import React from "react";
+import Sidenav from "../components/Sidenav";
+import Navbar from "../components/Navbar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import DrawerHeader from "../components/Sidenav";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Stack from "@mui/material/Stack";
 import "../Dashboard.css";
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { colors } from '@mui/material';
-import BarChart from '../charts/BarChart';
-import CountUp from 'react-countup';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import GeoChart from '../charts/GeoChart';
-import Footer from '../components/Footer';
-import { LineChart } from '../charts/LineChart';
-import { ColumnChart1 } from '../charts/ColumnCahrt1';
-import TunisiaMap from '../charts/TunisiaMap';
-import { Bar2 } from '../charts/Bar2';
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import { colors } from "@mui/material";
+import BarChart from "../charts/BarChart";
+import CountUp from "react-countup";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import GeoChart from "../charts/GeoChart";
+import Footer from "../components/Footer";
+import { LineChart } from "../charts/LineChart";
+import { Bar } from "../charts/Bar";
+import { Bar1 } from "../charts/Bar1";
+import { Table } from "../charts/Table";
+import { TableFournisseur } from "../charts/TableFournisseur";
+import MapContainer from "../charts/MapContainer";
 
-export default function VenteRevenue() {
-  
+export default function PromotionProduction() {
   const [dataProfit, setDataProfit] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseProfit = await axios.get('http://localhost:9000/api/v1/article/getProfit');
+        const responseProfit = await axios.get(
+          "http://localhost:9000/api/v1/article/getProfit"
+        );
         console.log(responseProfit.data[0].profit);
         setDataProfit(responseProfit.data[0].profit);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  const [dataNbTotalVente, setDataNbTotalVente] = useState(null);
+  const [dataNbClient, setDataNbClient] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseNbTotalVente = await axios.get('http://localhost:9000/api/v1/commande/count');
-        console.log(responseNbTotalVente);
-        setDataNbTotalVente(responseNbTotalVente.data);
+        const responseNbClient = await axios.get(
+          "http://localhost:9000/api/v1/pdv/count"
+        );
+        console.log(responseNbClient);
+        setDataNbClient(responseNbClient.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  const [dataSommeTotalVente, setDataSommeTotalVente] = useState(null);
+  const [dataNbFournisseur, setDataNbFournisseur] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseSommeTotalVente = await axios.get('http://localhost:9000/api/v1/commande/sum');
-        console.log(responseSommeTotalVente);
-        setDataSommeTotalVente(responseSommeTotalVente.data);
+        const responseNbFournisseur = await axios.get(
+          "http://localhost:9000/api/v1/fournisseur/count"
+        );
+        console.log(responseNbFournisseur.data);
+        setDataNbFournisseur(responseNbFournisseur.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  const [dataMoyennePanierParCommande, setDataMoyennePanierParCommande] = useState(null);
+  const [dataNbTotalArticle, setDataNbTotalArticle] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseMoyennePanierParCommande = await axios.get('http://localhost:9000/api/v1/commande/sumDividedByCountAll');
-        console.log(responseMoyennePanierParCommande);
-        setDataMoyennePanierParCommande(responseMoyennePanierParCommande.data);
+        const responseNbTotalArticle = await axios.get(
+          "http://localhost:9000/api/v1/article/count"
+        );
+        console.log(responseNbTotalArticle);
+        setDataNbTotalArticle(responseNbTotalArticle.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-
-  const [dataRepartitionArticleParSousCategorie, setDataRepartitionArticleParSousCategorie] = useState(null);
+  const [dataNbTotalArticleDisponible, setDataNbTotalArticleDisponible] =
+    useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseRepartitionArticleParSousCategorie = await axios.get('http://localhost:9000/api/v1/article/getRepartitionArticleParSousCategorie');
-
-        setDataRepartitionArticleParSousCategorie(responseRepartitionArticleParSousCategorie.data);
+        const responseNbTotalArticleDisponible = await axios.get(
+          "http://localhost:9000/api/v1/article/count/disponible"
+        );
+        console.log(responseNbTotalArticleDisponible);
+        setDataNbTotalArticleDisponible(responseNbTotalArticleDisponible.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-
-  const [dataSommeVenteParMois, setDataSommeVenteParMois] = useState(null);
+  const [dataMeilleurFournisseur, setDataMeilleurFournisseur] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseSommeVenteParMois = await axios.get('http://localhost:9000/api/v1/detailCommande/getSommeVenteParMois');
-
-        setDataSommeVenteParMois(responseSommeVenteParMois.data);
+        const responseMeilleurFournisseur = await axios.get(
+          "http://localhost:9000/api/v1/fournisseur/MeilleurFournisseur"
+        );
+        console.log(responseMeilleurFournisseur.data);
+        setDataMeilleurFournisseur(responseMeilleurFournisseur.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
+  const [dataTopProduitVendu, setDataTopProduitVendu] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseTopProduitVendu = await axios.get(
+          "http://localhost:9000/api/v1/article/getTopProduitVendue"
+        );
+        console.log(responseTopProduitVendu.data);
+        setDataTopProduitVendu(responseTopProduitVendu.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    fetchData();
+  }, []);
 
+  const [dataNbArticleVenduParSaison, setDataNbArticleVenduParSaison] =
+    useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseNbArticleVenduParSaison = await axios.get(
+          "http://localhost:9000/api/v1/detailCommande/getNbArticleVenduParSaison"
+        );
+        console.log(responseNbArticleVenduParSaison.data);
+        setDataNbArticleVenduParSaison(responseNbArticleVenduParSaison.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [
+    dataRepartitionArticleParCategorie,
+    setDataRepartitionArticleParCategorie,
+  ] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseRepartitionArticleParCategorie = await axios.get(
+          "http://localhost:9000/api/v1/article/getArticleCountByCategorie"
+        );
+        console.log(responseRepartitionArticleParCategorie.data);
+        setDataRepartitionArticleParCategorie(
+          responseRepartitionArticleParCategorie.data
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [dataSommeVenteParUser, setDataSommeVenteParUser] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseSommeVenteParUser = await axios.get(
+          "http://localhost:9000/api/v1/commande/getSumVenteParUser"
+        );
+        console.log(responseSommeVenteParUser.data);
+        setDataSommeVenteParUser(responseSommeVenteParUser.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
-    <div className='bgcolor'>
-    <Navbar />
-      <Box height={70}/>
-        <Box sx={{ display: 'flex' }}>
-          <Sidenav/>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-              <Stack spacing={2}> 
+      <div className="bgcolor">
+        <Navbar />
+        <Box height={70} />
+        <Box sx={{ display: "flex" }}>
+          <Sidenav />
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Stack spacing={2}>
               
-                <Grid container spacing={2} >
-                    
-                        <Grid item xs={4} >
-                          <Stack spacing={2} > 
-                            <Stack spacing={2} direction="row">
-                                <Card sx={{minWidth: 60 + "%", height: 177 }}>
-                                  <Stack spacing={2}>
-                                    <CardContent>
-                                            <div className="iconstyle">
-                                              <CreditCardIcon style={{fontSize:30}}/>
-                                            </div>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{color:"#ccd1d1"}}>
-                                                  <CountUp start={0} end={dataProfit} duration={3} />
-                                            </Typography>
-                                            <Typography gutterBottom variant="body2" component="div" sx={{color: "#ccd1d1"}}>
-                                                  Somme des profits
-                                            </Typography>
-                                    </CardContent>                                              
-                                  </Stack>
-                                </Card>
-                                <Card sx={{minWidth: 60 + "%", height: 177}}>
-                                  <Stack spacing={2}>
-                                      <CardContent>
-                                            <div className="iconstyle">
-                                                    <CreditCardIcon style={{fontSize:30}}/>
-                                            </div>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{color:"#ccd1d1"}}>
-                                                  <CountUp start={0} end={dataNbTotalVente} duration={3} />
-                                            </Typography>
-                                            <Typography gutterBottom variant="body2" component="div" sx={{color: "#ccd1d1"}}>
-                                                  Nombre totale de Ventes
-                                            </Typography>
-                                      </CardContent>
-                                  </Stack>
-                                </Card>
-                            </Stack>
-                            <Stack spacing={2} direction="row">
-                                <Card sx={{minWidth: 60 + "%", height: 177}}>
-                                  <Stack spacing={2}>
-                                      <CardContent>
-                                      <div className="iconstyle">
-                                              <CreditCardIcon style={{fontSize:30}}/>
-                                            </div>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{color:"#ccd1d1"}}>
-                                                  <CountUp start={0} end={dataSommeTotalVente} duration={3} />
-                                            </Typography>
-                                            <Typography gutterBottom variant="body2" component="div" sx={{color: "#ccd1d1"}}>
-                                                  Somme total des ventes
-                                            </Typography>
-                                      </CardContent>
-                                      
-                                  </Stack>
-                                </Card>
-                                <Card sx={{minWidth: 60 + "%", height: 177}}>                                  
-                                  <Stack spacing={2}>
-                                      <CardContent>
-                                            <div className="iconstyle">
-                                              <CreditCardIcon style={{fontSize:30}}/>
-                                            </div>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{color:"#ccd1d1"}}>
-                                                  <CountUp start={0} end={dataMoyennePanierParCommande} duration={3} />
-                                            </Typography>
-                                            <Typography gutterBottom variant="body2" component="div" sx={{color: "#ccd1d1"}}>
-                                                  Moyenne pannier par commande
-                                            </Typography>
-                                      </CardContent>
-                                      
-                                  </Stack>
-                                </Card>
-                            </Stack>
-                          </Stack>
-                        </Grid>
-                        <Grid item xs={8} >
-                          <Stack spacing={6} marginLeft={14} direction="row">
-                              <Card sx={{width: 800 , height: 370}}>
-                                <Stack spacing={2}>
-                                    
-                                    <CardContent>
-                                      <LineChart />
-                                    </CardContent>
-                                </Stack>
-                              </Card> 
-                          </Stack>
-                        </Grid> 
-                  
-                </Grid>
 
-
-
-              <Box height={20}/>
+              <Box height={20} />
 
               <Grid container spacing={2}>
+              
                 <Grid item xs={12}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                            <CardContent>
-                             
-                            </CardContent>
-                      </Card>
+                  <Card sx={{ height: 75 + "vh" }}>
+                    <CardContent>
+                        <MapContainer/>
+                    </CardContent>
+                  </Card>
                 </Grid>
-                <Grid item xs={12}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                      <CardContent>
-                              <Bar2 dataSommeVenteParMois={dataSommeVenteParMois}>
-                              
-                              </Bar2>
-                      </CardContent>
-                           
-                      </Card>
-                </Grid> 
-              </Grid> 
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                            <ColumnChart1 dataRepartitionArticleParSousCategorie={dataRepartitionArticleParSousCategorie}> 
-                            
-                            </ColumnChart1>
-                      </Card>
-                </Grid>
-                <Grid item xs={6}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                            <TunisiaMap  >
-                              
-                            </TunisiaMap>
-                      </Card>
-                </Grid> 
               </Grid>
-                <Footer/> 
-              </Stack>
-            </Box>
+              <Box height={20} />
+
+              
+              <Box height={20} />
+
             
+
+              <Footer />
+            </Stack>
+          </Box>
         </Box>
-    </div>
-    
+      </div>
     </>
-     )
+  );
 }
-
-

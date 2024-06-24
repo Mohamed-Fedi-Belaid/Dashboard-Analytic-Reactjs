@@ -6,7 +6,7 @@ import InventairePoduit from './pages/InventairePoduit';
 import CommandeActivite from './pages/CommandeActivite';
 import PromotionProduction from './pages/PromotionProduction';
 import ClassificationArticle from './pages/ClassificationArticle';
-import TunisiaMap from './charts/TunisiaMap';
+import TunisiaMap from './charts/MapContainer';
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
 

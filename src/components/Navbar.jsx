@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
@@ -7,9 +7,11 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import LogoutIcon from '@mui/icons-material/Logout'; // Importez l'icône de déconnexion
+import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../../src/assets/Digidis.PNG';
 import { useAppStore } from '../appStore';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AppBar = styled(MuiAppBar, {})(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -17,6 +19,7 @@ const AppBar = styled(MuiAppBar, {})(({ theme }) => ({
 
 export default function Navbar() {
   const { updateOpen, dopen } = useAppStore();
+  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -32,16 +35,31 @@ export default function Navbar() {
           >
             <MenuIcon />
           </IconButton>
+          
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            <img src={logo} style={{ height: '75px', width: '200px' }} alt="logo"></img>
+            <img src={logo} style={{ height: '75px', width: '200px' }} alt="logo" />
           </Typography>
-
+          
           <Box sx={{ flexGrow: 1 }} />
+          
+          {/* Move DatePicker to the left */}
+          <Toolbar sx={{ marginLeft: 'auto' }}>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="dd/MM/yyyy"
+              showYearDropdown
+              showMonthDropdown
+              dropdownMode="select"
+              style={{ marginLeft: '10px' }} // Adjust left margin as needed
+            />
+          </Toolbar>
+          
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
               <IconButton
@@ -51,10 +69,9 @@ export default function Navbar() {
                 aria-controls="primary-search-account-menu"
                 aria-haspopup="true"
                 color="inherit"
-                onClick={() => {      localStorage.removeItem('token');
-              }}
+                onClick={() => { localStorage.removeItem('token'); }}
               >
-                <LogoutIcon /> {/* Remplacez l'icône AccountCircle par LogoutIcon */}
+                <LogoutIcon />
               </IconButton>
             </Link>
           </Box>

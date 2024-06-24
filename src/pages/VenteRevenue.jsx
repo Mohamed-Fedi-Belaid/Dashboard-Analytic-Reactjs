@@ -23,9 +23,12 @@ import GeoChart from '../charts/GeoChart';
 import Footer from '../components/Footer';
 import { LineChart } from '../charts/LineChart';
 import { ColumnChart1 } from '../charts/ColumnCahrt1';
-import TunisiaMap from '../charts/TunisiaMap';
+import TunisiaMap from '../charts/MapContainer';
 import { Bar2 } from '../charts/Bar2';
 
+import { Table1 } from '../charts/Table1';
+
+import { TableTauxConversion } from '../charts/TableTauxConversion';
 export default function VenteRevenue() {
   
   const [dataProfit, setDataProfit] = useState(null);
@@ -139,6 +142,26 @@ export default function VenteRevenue() {
     fetchData();
   }, []);
 
+
+const [dataCAGR, setDataCAGR] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseCAGR = await axios.get('http://localhost:9000/api/v1/article/getCAGR');
+        console.log(responseCAGR.data);
+        
+        setDataCAGR(responseCAGR.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+  
   return (
     <>
     <div className='bgcolor'>
@@ -241,13 +264,22 @@ export default function VenteRevenue() {
               <Box height={20}/>
 
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                            <CardContent>
-                            
-                            </CardContent>
-                      </Card>
-                </Grid>
+              <Stack spacing={2} direction="row">
+                  <Grid item xs={6}>
+                        <Card sx={{ height: 60 + "vh" }}>  
+                              <CardContent>
+                                <Table1  dataCAGR={dataCAGR}/>
+                              </CardContent>
+                        </Card>
+                  </Grid>
+                  <Grid item xs={6}>
+                        <Card sx={{ height: 60 + "vh" }}>  
+                              <CardContent>
+                                <TableTauxConversion  />
+                              </CardContent>
+                        </Card>
+                  </Grid>
+              </Stack>
                 <Grid item xs={12}>
                       <Card sx={{ height: 60 + "vh" }}>  
                       <CardContent>
@@ -267,13 +299,7 @@ export default function VenteRevenue() {
                             </ColumnChart1>
                       </Card>
                 </Grid>
-                <Grid item xs={6}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                            <TunisiaMap  >
-                              
-                            </TunisiaMap>
-                      </Card>
-                </Grid> 
+               
               </Grid>
                 <Footer/> 
               </Stack>

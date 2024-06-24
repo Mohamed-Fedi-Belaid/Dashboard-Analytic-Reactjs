@@ -128,7 +128,7 @@ export default function CommandeActivite() {
                                                 <Typography gutterBottom variant="body2" component="div" sx={{color: "#ccd1d1"}}>
                                                       Nombre de catégorie
                                                 </Typography>
-                                        </CardContent>  
+                                      </CardContent>  
                                   </Stack>
                                 </Card>
                             </Stack>
@@ -144,7 +144,7 @@ export default function CommandeActivite() {
                     <Grid xs={12} container spacing={2}>
                       
                           <Grid item xs={8}>
-                                <Card sx={{minWidth: 153.5 + "%", height: 50 + "vh" }}>  
+                                <Card sx={{minWidth: 153 + "%", height: 50 + "vh" }}>  
                                       <CardContent>
                                         <ColumnChart dataNbVenteParCategorie={dataNbVenteParCategorie}/>
                                       </CardContent>
@@ -155,15 +155,9 @@ export default function CommandeActivite() {
                     </Grid> 
                     
                     <Grid container spacing={2}>
+                     
                       <Grid item xs={12}>
-                            <Card sx={{minWidth: 50 + "%", height: 70 + "vh" }}>  
-                                  <CardContent>
-                                   <Histogram/>
-                                  </CardContent>
-                            </Card>
-                      </Grid>
-                      <Grid item xs={8}>
-                                <Card sx={{minWidth: 104 + "%"  , height: 60 + "vh" }}>  
+                                <Card sx={{minWidth: 100 + "%"  , height: 60 + "vh" }}>  
                                       <CardContent>
                                         <PieChart dataArticleCountByCategory={dataArticleCountByCategory} />
                                       </CardContent>

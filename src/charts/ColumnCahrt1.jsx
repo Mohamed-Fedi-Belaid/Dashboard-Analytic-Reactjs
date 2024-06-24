@@ -26,7 +26,7 @@ export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
   const data = [["Element", "Nombre de vente", { role: "style" }], ...listVar];
   const options = {
     title:"Répartition des articles par sous catégorie",
-    bar: { groupWidth: "80%" },
+    bar: { groupWidth: "100%" },
   };
 
   return (

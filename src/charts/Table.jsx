@@ -34,7 +34,7 @@ export function Table({dataSommeVenteParUser}) {
     }
   }, [dataSommeVenteParUser]);
 
-  const data = [["Meilleur Commercants", "Somme des ventes"], ...listVar];
+  const data = [["Meilleur Commercant", "Somme des ventes"], ...listVar];
 
   const options = {
     allowHtml: true,
