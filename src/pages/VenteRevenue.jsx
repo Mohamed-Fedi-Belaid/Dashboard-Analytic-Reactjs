@@ -28,6 +28,8 @@ import { Bar2 } from '../charts/Bar2';
 
 import { Table1 } from '../charts/Table1';
 
+
+import { TableTauxRetention} from '../charts/TableTauxRetention';
 import { TableTauxConversion } from '../charts/TableTauxConversion';
 export default function VenteRevenue() {
   
@@ -122,8 +124,6 @@ export default function VenteRevenue() {
 
     fetchData();
   }, []);
-
-
 
 
   const [dataSommeVenteParVille, setDataSommeVenteParVille] = useState(null);
@@ -263,33 +263,34 @@ const [dataCAGR, setDataCAGR] = useState(null);
 
               <Box height={20}/>
 
-              <Grid container spacing={2}>
-              <Stack spacing={2} direction="row">
+              <Grid container spacing={2} direction="row">
+                
                   <Grid item xs={6}>
-                        <Card sx={{ height: 60 + "vh" }}>  
+                        <Card sx={{  height: 40 + "vh" }}>  
                               <CardContent>
-                                <Table1  dataCAGR={dataCAGR}/>
+                              <Table1  dataCAGR={dataCAGR}/>
                               </CardContent>
                         </Card>
                   </Grid>
                   <Grid item xs={6}>
-                        <Card sx={{ height: 60 + "vh" }}>  
+                        <Card sx={{ height: 40 + "vh" }}>  
                               <CardContent>
-                                <TableTauxConversion  />
+                              <TableTauxConversion/>
                               </CardContent>
                         </Card>
                   </Grid>
-              </Stack>
-                <Grid item xs={12}>
-                      <Card sx={{ height: 60 + "vh" }}>  
-                      <CardContent>
-                              <Bar2 dataSommeVenteParMois={dataSommeVenteParMois}>
-                              
-                              </Bar2>
-                      </CardContent>
-                           
-                      </Card>
-                </Grid> 
+                  <Box height={20}/>
+                  <Grid item xs={12}>
+                        <Card sx={{ height: 60 + "vh" }}>  
+                        <CardContent>
+                                <Bar2 dataSommeVenteParMois={dataSommeVenteParMois}>
+                                
+                                </Bar2>
+                        </CardContent>
+                            
+                        </Card>
+                  </Grid>
+                  
               </Grid> 
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -298,6 +299,14 @@ const [dataCAGR, setDataCAGR] = useState(null);
                             
                             </ColumnChart1>
                       </Card>
+                </Grid>
+                
+                <Grid item xs={6}>
+                    <Card sx={{ height: 60 + "vh" }}> 
+                      <CardContent>
+                          <TableTauxRetention/>
+                      </CardContent>
+                    </Card>
                 </Grid>
                
               </Grid>

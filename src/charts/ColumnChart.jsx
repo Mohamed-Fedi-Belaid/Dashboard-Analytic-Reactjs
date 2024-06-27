@@ -21,7 +21,7 @@ export function ColumnChart({ dataNbVenteParCategorie = [] }) {
     }
   }, [dataNbVenteParCategorie]);
 
-  const data = [["Element", "Nombre de vente", { role: "style" }], ...listVar];
+  const data = [["Element", "Nombre de vente par catégorie", { role: "style" }], ...listVar];
   const options = {
     bar: { groupWidth: "80%" },
   };

@@ -2,15 +2,13 @@ import React from "react";
 import { Chart } from "react-google-charts";
 
 export const data = [
-  ["Période", "Taux de conversion"],
-  ["1 Janv 2017 - 31 Dec 2017", 0],
-  ["1 Janv 2018 - 31 Dec 2018", 0],
-  ["1 Janv 2019 - 31 Dec 2019", 0],
-  ["1 Janv 2020 - 31 Dec 2020", 0],
-  ["1 Janv 2021 - 31 Dec 2021", 0],
-  ["1 Janv 2022 - 31 Dec 2022", 0],
-  ["1 Janv 2023 - 31 Dec 2023", 50],
-  ["1 Janv 2024 - 31 juin 2024", 51.42],
+  ["Période", "Taux de Rétention"],
+  ["01/01/2021 -> 31/12/2021", 0],
+  ["01/01/2022 -> 31/12/2022", 0],
+  ["01/01/2023 -> 31/09/2023", 0],
+  ["01/10/2023 -> 31/12/2023 ", 0],
+  ["01/01/2024 -> 31/03/2024", 0],
+  ["01/04/2024 -> 30/05/2024", 0],  
   
 ];
 
@@ -29,11 +27,12 @@ export const formatters = [
   },
 ];
 
-export function TableTauxConversion() {
+export function TableTauxRetention() {
   return (
     <Chart
       chartType="Table"
       width="120%"
+     
       height="400px"
       data={data}
       options={options}
