@@ -41,7 +41,7 @@ export function Bar({ dataNbArticleVenduParSaison = [] } ) {
     return (
     <Chart
       chartType="Bar"
-      width="100%"
+      width="97%"
       height="400px"
       data={data}
       options={options}

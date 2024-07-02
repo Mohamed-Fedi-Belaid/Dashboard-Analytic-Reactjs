@@ -3,8 +3,8 @@ import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 export const options = {
   chart: {
-    title: "Répartition des articles par catégorie",
-    subtitle: "Nombre d'article vendu et total des ventes",
+    
+    title: "Nombre d'article vendu par catégorie",
     
   },
 };
@@ -22,7 +22,7 @@ export function Bar1({ dataRepartitionArticleParCategorie = [] } ) {
           newListVar.push([
             dataRepartitionArticleParCategorie[i].category_name,
             dataRepartitionArticleParCategorie[i].article_count,
-            dataRepartitionArticleParCategorie[i].total_price
+      
             
         
             
@@ -35,7 +35,7 @@ export function Bar1({ dataRepartitionArticleParCategorie = [] } ) {
   
     const data = [
     
-        ["Nom de Catégorie", "Nombre d'article vendu","Total des ventes"],
+        ["Nom de Catégorie", "Nombre d'article vendu"],
         ...listVar
         
       ];

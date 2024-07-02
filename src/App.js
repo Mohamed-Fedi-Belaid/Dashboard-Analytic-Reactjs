@@ -7,8 +7,11 @@ import CommandeActivite from './pages/CommandeActivite';
 import PromotionProduction from './pages/PromotionProduction';
 import ClassificationArticle from './pages/ClassificationArticle';
 import TunisiaMap from './charts/MapContainer';
+import Navbar from './components/Navbar';  // Import Navbar
+import axios from 'axios';
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [dataProfit, setDataProfit] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -28,14 +31,23 @@ function App() {
   }, []);
 
   const handleLogout = () => {
-    // Clear both localStorage and sessionStorage
     localStorage.removeItem('token');
     sessionStorage.clear();
     setAuthenticated(false);
   };
 
+  const fetchData = async (start, end) => {
+    try {
+      const responseProfit = await axios.get(`http://localhost:9000/api/v1/article/getProfit?startDate=${start}&endDate=${end}`);
+      setDataProfit(responseProfit.data[0].profit);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
     <BrowserRouter>
+      {authenticated && <Navbar fetchData={fetchData} handleLogout={handleLogout} />}
       <Routes>
         <Route path="/DataChart" element={<TunisiaMap />} />
         <Route path="/login" element={<Login />} />
@@ -45,7 +57,7 @@ function App() {
         />
         <Route
           path="/VenteRevenue"
-          element={authenticated ? <VenteRevenue /> : <Navigate to="/login" />}
+          element={authenticated ? <VenteRevenue dataProfit={dataProfit} /> : <Navigate to="/login" />}
         />
         <Route
           path="/InventairePoduit"

@@ -13,7 +13,7 @@ export function ColumnChart({ dataNbVenteParCategorie = [] }) {
         newListVar.push([
           dataNbVenteParCategorie[i].nom,
           dataNbVenteParCategorie[i].SommeVente,
-          "#ff907a",
+          "",
         ]);
       }
       console.log(newListVar)

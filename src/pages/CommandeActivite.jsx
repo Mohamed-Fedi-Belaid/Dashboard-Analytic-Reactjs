@@ -255,18 +255,7 @@ export default function CommandeActivite() {
                     </Grid> 
                     <Box height={20}/>
                  
-                    <Grid xs={12} container spacing={2}>
-                      
-                          <Grid item xs={8}>
-                                <Card sx={{minWidth: 153 + "%", height: 50 + "vh" }}>  
-                                      <CardContent>
-                                        
-                                      </CardContent>
-                                </Card>
-                          </Grid>
-                           
-                     
-                    </Grid> 
+               
                     
                     <Grid container spacing={2} direction={'row'}>
                      

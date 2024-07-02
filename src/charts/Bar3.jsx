@@ -3,25 +3,26 @@ import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 export const options = {
   chart: {
-    title: "Somme des ventes par mois",
-    subtitle: "Nombre d'article vendu et total des ventes",
+    
+    title: " Total des ventes par catégorie",
     
   },
 };
 
-export function Bar2({ dataSommeVenteParMois = [] } ) {
+export function Bar3({ dataRepartitionArticleParCategorie = [] } ) {
 
     const [listVar, setListVar] = useState([]);
 
     useEffect(() => {
-      if (dataSommeVenteParMois) {
+      if (dataRepartitionArticleParCategorie) {
         const newListVar = [];
-        for (let i = 0; i < dataSommeVenteParMois.length; i++) {
-          console.log(dataSommeVenteParMois[i]);
+        for (let i = 0; i < dataRepartitionArticleParCategorie.length; i++) {
+          console.log(dataRepartitionArticleParCategorie[i]);
             
           newListVar.push([
-            dataSommeVenteParMois[i].mois,
-            dataSommeVenteParMois[i].somme,
+            dataRepartitionArticleParCategorie[i].category_name,
+            
+            dataRepartitionArticleParCategorie[i].total_price
             
         
             
@@ -30,11 +31,11 @@ export function Bar2({ dataSommeVenteParMois = [] } ) {
         console.log(newListVar)
         setListVar(newListVar);
       }
-    }, [dataSommeVenteParMois]);
+    }, [dataRepartitionArticleParCategorie]);
   
     const data = [
     
-        ["Mois", "Nombre d'article vendu"],
+        ["Nom de Catégorie","Total des ventes"],
         ...listVar
         
       ];

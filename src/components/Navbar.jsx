@@ -17,9 +17,20 @@ const AppBar = styled(MuiAppBar, {})(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
 }));
 
-export default function Navbar() {
+export default function Navbar({ fetchData }) {
   const { updateOpen, dopen } = useAppStore();
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const handleDateChange = async (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+
+    if (start && end) {
+      fetchData(start.toISOString(), end.toISOString());
+    }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -47,11 +58,13 @@ export default function Navbar() {
           
           <Box sx={{ flexGrow: 1 }} />
           
-          {/* Move DatePicker to the left */}
           <Toolbar sx={{ marginLeft: 'auto' }}>
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={handleDateChange}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
               dateFormat="dd/MM/yyyy"
               showYearDropdown
               showMonthDropdown

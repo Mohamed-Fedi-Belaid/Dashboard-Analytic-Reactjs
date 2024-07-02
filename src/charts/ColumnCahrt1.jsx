@@ -15,7 +15,7 @@ export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
            
             dataRepartitionArticleParSousCategorie[i].nom,
             dataRepartitionArticleParSousCategorie[i].sum,
-          "#ff907a",
+          "",
         ]);
       }
       console.log(newListVar)
@@ -32,7 +32,7 @@ export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
   return (
     dataRepartitionArticleParSousCategorie && <Chart
       chartType="ColumnChart"
-      width="600px"
+      width="1200px"
       height="300px"
       data={data}
       options={options}

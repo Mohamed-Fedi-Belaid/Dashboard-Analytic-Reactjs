@@ -24,6 +24,7 @@ import Footer from "../components/Footer";
 import { LineChart } from "../charts/LineChart";
 import { Bar } from "../charts/Bar";
 import { Bar1 } from "../charts/Bar1";
+import { Bar3 } from "../charts/Bar3";
 import { Table } from "../charts/Table";
 import { TableFournisseur } from "../charts/TableFournisseur";
 
@@ -342,7 +343,7 @@ export default function InventairePoduit() {
 
               <Grid container spacing={2}>
                 <Grid item xs={4}>
-                  <Card sx={{ height: 75 + "vh" }}>
+                  <Card sx={{ height: 60 + "vh" }}>
                     <CardContent>
                       <Bar
                         dataNbArticleVenduParSaison={
@@ -353,7 +354,7 @@ export default function InventairePoduit() {
                   </Card>
                 </Grid>
                 <Grid item xs={8}>
-                  <Card sx={{ height: 75 + "vh" }}>
+                  <Card sx={{ height: 60 + "vh" }}>
                     <CardContent>
                       <Bar1
                         dataRepartitionArticleParCategorie={
@@ -363,6 +364,27 @@ export default function InventairePoduit() {
                     </CardContent>
                   </Card>
                 </Grid>
+                
+              </Grid>
+
+
+
+              <Box height={20} />
+
+              <Grid container spacing={2}>
+                
+                <Grid item xs={12}>
+                  <Card sx={{ height: 60 + "vh" }}>
+                    <CardContent>
+                      <Bar3
+                        dataRepartitionArticleParCategorie={
+                          dataRepartitionArticleParCategorie
+                        }
+                      />
+                    </CardContent>
+                  </Card>
+                </Grid>
+                
               </Grid>
               <Box height={20} />
 
@@ -370,6 +392,7 @@ export default function InventairePoduit() {
                 <Grid item xs={4}>
                   <Stack spacing={46} direction="row">
                     <Stack spacing={6} direction="row">
+                      
                       <Card sx={{ minWidth: 68.1 + "%", height: 177 }}>
                         <Stack spacing={6} marginLeft={2}>
                           <Table
