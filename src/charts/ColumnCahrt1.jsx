@@ -32,7 +32,7 @@ export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
   return (
     dataRepartitionArticleParSousCategorie && <Chart
       chartType="ColumnChart"
-      width="1200px"
+      width="1000px"
       height="300px"
       data={data}
       options={options}

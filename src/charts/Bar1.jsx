@@ -23,9 +23,6 @@ export function Bar1({ dataRepartitionArticleParCategorie = [] } ) {
             dataRepartitionArticleParCategorie[i].category_name,
             dataRepartitionArticleParCategorie[i].article_count,
       
-            
-        
-            
           ]);
         }
         console.log(newListVar)

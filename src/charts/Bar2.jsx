@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export const options = {
   chart: {
     title: "Somme des ventes par mois",
-    subtitle: "Nombre d'article vendu et total des ventes",
+    
     
   },
 };

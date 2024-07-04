@@ -30,28 +30,30 @@ import { TableFournisseur } from "../charts/TableFournisseur";
 
 export default function InventairePoduit() {
   const [dataProfit, setDataProfit] = useState(null);
+  const [startDate, setStartDate] = useState(new Date().toISOString());
+  const [endDate, setEndDate] = useState(new Date().toISOString());
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseProfit = await axios.get(
           "http://localhost:9000/api/v1/article/getProfit"
         );
-        console.log(responseProfit.data[0].profit);
-        setDataProfit(responseProfit.data[0].profit);
+        console.log(responseProfit?.data?.[0]?.profit);
+        setDataProfit(responseProfit?.data?.[0]?.profit);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataNbClient, setDataNbClient] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseNbClient = await axios.get(
-          "http://localhost:9000/api/v1/pdv/count"
+          "http://localhost:9000/api/v1/pdv/count?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseNbClient);
         setDataNbClient(responseNbClient.data);
@@ -61,14 +63,14 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataNbFournisseur, setDataNbFournisseur] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseNbFournisseur = await axios.get(
-          "http://localhost:9000/api/v1/fournisseur/count"
+          "http://localhost:9000/api/v1/fournisseur/count?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseNbFournisseur.data);
         setDataNbFournisseur(responseNbFournisseur.data);
@@ -78,14 +80,14 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataNbTotalArticle, setDataNbTotalArticle] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseNbTotalArticle = await axios.get(
-          "http://localhost:9000/api/v1/article/count"
+          "http://localhost:9000/api/v1/article/count?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseNbTotalArticle);
         setDataNbTotalArticle(responseNbTotalArticle.data);
@@ -95,7 +97,7 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataNbTotalArticleDisponible, setDataNbTotalArticleDisponible] =
     useState(null);
@@ -103,7 +105,7 @@ export default function InventairePoduit() {
     const fetchData = async () => {
       try {
         const responseNbTotalArticleDisponible = await axios.get(
-          "http://localhost:9000/api/v1/article/count/disponible"
+          "http://localhost:9000/api/v1/article/count/disponible?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseNbTotalArticleDisponible);
         setDataNbTotalArticleDisponible(responseNbTotalArticleDisponible.data);
@@ -113,14 +115,14 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataMeilleurFournisseur, setDataMeilleurFournisseur] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseMeilleurFournisseur = await axios.get(
-          "http://localhost:9000/api/v1/fournisseur/MeilleurFournisseur"
+          "http://localhost:9000/api/v1/fournisseur/MeilleurFournisseur?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseMeilleurFournisseur.data);
         setDataMeilleurFournisseur(responseMeilleurFournisseur.data);
@@ -130,14 +132,14 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataTopProduitVendu, setDataTopProduitVendu] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseTopProduitVendu = await axios.get(
-          "http://localhost:9000/api/v1/article/getTopProduitVendue"
+          "http://localhost:9000/api/v1/article/getTopProduitVendue?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseTopProduitVendu.data);
         setDataTopProduitVendu(responseTopProduitVendu.data);
@@ -147,7 +149,7 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataNbArticleVenduParSaison, setDataNbArticleVenduParSaison] =
     useState(null);
@@ -155,7 +157,7 @@ export default function InventairePoduit() {
     const fetchData = async () => {
       try {
         const responseNbArticleVenduParSaison = await axios.get(
-          "http://localhost:9000/api/v1/detailCommande/getNbArticleVenduParSaison"
+          "http://localhost:9000/api/v1/detailCommande/getNbArticleVenduParSaison?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseNbArticleVenduParSaison.data);
         setDataNbArticleVenduParSaison(responseNbArticleVenduParSaison.data);
@@ -165,7 +167,7 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [
     dataRepartitionArticleParCategorie,
@@ -175,7 +177,7 @@ export default function InventairePoduit() {
     const fetchData = async () => {
       try {
         const responseRepartitionArticleParCategorie = await axios.get(
-          "http://localhost:9000/api/v1/article/getArticleCountByCategorie"
+          "http://localhost:9000/api/v1/article/getArticleCountByCategorie?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseRepartitionArticleParCategorie.data);
         setDataRepartitionArticleParCategorie(
@@ -187,14 +189,14 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
 
   const [dataSommeVenteParUser, setDataSommeVenteParUser] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseSommeVenteParUser = await axios.get(
-          "http://localhost:9000/api/v1/commande/getSumVenteParUser"
+          "http://localhost:9000/api/v1/commande/getSumVenteParUser?startDate="+startDate+"&endDate="+endDate
         );
         console.log(responseSommeVenteParUser.data);
         setDataSommeVenteParUser(responseSommeVenteParUser.data);
@@ -204,12 +206,32 @@ export default function InventairePoduit() {
     };
 
     fetchData();
-  }, []);
+  }, [, startDate, endDate]);
+  
+  const handleSetStartDate = (date) => {
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setStartDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+  };
+  const handleSetEndDate = (date) => {
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setEndDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+  };
 
   return (
     <>
       <div className="bgcolor">
-        <Navbar />
+        <Navbar 
+          handleSdate={handleSetStartDate}
+          handleEdate={handleSetEndDate}
+          sdate={startDate}
+          edate={endDate}
+        />
         <Box height={70} />
         <Box sx={{ display: "flex" }}>
           <Sidenav />
@@ -439,7 +461,7 @@ export default function InventairePoduit() {
                           start={0}
                           end={
                             dataTopProduitVendu
-                              ? dataTopProduitVendu[0].num
+                              ? dataTopProduitVendu?.[0]?.num
                               : ""
                           }
                           duration={3}
@@ -455,7 +477,7 @@ export default function InventairePoduit() {
                         <div>
                           Le nom de produit est :{" "}
                           {dataTopProduitVendu
-                            ? dataTopProduitVendu[0].nom
+                            ? dataTopProduitVendu?.[0]?.nom
                             : ""}
                         </div>
                       </Typography>

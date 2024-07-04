@@ -9,10 +9,12 @@ import ClassificationArticle from './pages/ClassificationArticle';
 import TunisiaMap from './charts/MapContainer';
 import Navbar from './components/Navbar';  // Import Navbar
 import axios from 'axios';
+
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [dataProfit, setDataProfit] = useState(null);
-
+  const [dataNbTotalVente, setDataNbTotalVente] = useState(null);
   useEffect(() => {
     const token = localStorage.getItem('token');
     setAuthenticated(!!token);
@@ -40,6 +42,7 @@ function App() {
     try {
       const responseProfit = await axios.get(`http://localhost:9000/api/v1/article/getProfit?startDate=${start}&endDate=${end}`);
       setDataProfit(responseProfit.data[0].profit);
+      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -47,9 +50,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      {authenticated && <Navbar fetchData={fetchData} handleLogout={handleLogout} />}
+      {/* {authenticated && <Navbar fetchData={fetchData} handleLogout={handleLogout} />} */}
       <Routes>
-        <Route path="/DataChart" element={<TunisiaMap />} />
+        {/* <Route path="/DataChart" element={<TunisiaMap />} /> */}
         <Route path="/login" element={<Login />} />
         <Route
           path="/"
