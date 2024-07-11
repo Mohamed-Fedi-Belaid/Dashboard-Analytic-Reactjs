@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-
+import { useEffect, useState } from "react";
 export const data = [
   [
     "Day",
@@ -31,24 +31,47 @@ export const data = [
   [22, 1],
   [23, 2],
   [24, 2],
-  
 
-
-
-
-
-  
   
 ];
 
 export const options = {
   chart: {
-    title: "Evolution des commande au cours du 30 derniers jours",
+    title: "Evolution des commandes au cours du temps",
     
   },
 };
 
-export function LineChart() {
+export function LineChart({ dataCommandeCountByDayForLast3Years = [] }) {
+
+  const [listVar, setListVar] = useState([]);
+
+    useEffect(() => {
+      if (dataCommandeCountByDayForLast3Years) {
+        const newListVar = [];
+        for (let i = 0; i < dataCommandeCountByDayForLast3Years.length; i++) {
+          console.log(dataCommandeCountByDayForLast3Years[i]);
+            
+          newListVar.push([
+            dataCommandeCountByDayForLast3Years[i].day,
+            dataCommandeCountByDayForLast3Years[i].commandeCount
+            
+        
+            
+          ]);
+        }
+        console.log(newListVar)
+        setListVar(newListVar);
+      }
+    }, [dataCommandeCountByDayForLast3Years]);
+  
+    const data = [
+    
+        ["Year", ""],
+        ...listVar
+        
+      ];
+
   return (
     <Chart
       chartType="Line"

@@ -29,15 +29,35 @@ export default function ClassificationArticle() {
     })
     .catch((err) => {const {response}= err;
       console.log(err);
-      console.log(response?.data);});
+      console.log(response?.data)})
+  }
 
-// Assuming the API response contains a field named "category"
-  };
+  const [startDate, setStartDate] = useState(new Date().toISOString());
+  const [endDate, setEndDate] = useState(new Date().toISOString());
+  const handleSetStartDate = (date) => {
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setStartDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+};
+const handleSetEndDate = (date) => {
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setEndDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+};
 
   return (
     <>
       <div className='bgcolor'>
-        <Navbar />
+        <Navbar
+          handleSdate={handleSetStartDate}
+                    handleEdate={handleSetEndDate}
+                    sdate={startDate}
+                    edate={endDate}
+        />
         <Box height={70} />
         <Box sx={{ display: 'flex' }}>
           <Sidenav />

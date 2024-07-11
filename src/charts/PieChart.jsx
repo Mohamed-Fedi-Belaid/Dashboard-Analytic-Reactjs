@@ -30,7 +30,7 @@ export default function PieChart({dataArticleCountByCategory}) {
 
   const data = [["Element",  { role: "style" }], ...listVar];
   const options = {
-    title:"Répartition des totale de vente par catégorie",
+    title:"Répartition de totale de vente par catégorie",
     bar: { groupWidth: "70%" },
   };
 

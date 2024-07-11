@@ -3,8 +3,8 @@ import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 export const options = {
   chart: {
-    title: "Somme des ventes par mois",
-    subtitle: "Nombre d'article vendu et total des ventes",
+    title: "Nombre d'articles vendus par mois",
+    
     
   },
 };
@@ -34,7 +34,7 @@ export function Bar2({ dataSommeVenteParMois = [] } ) {
   
     const data = [
     
-        ["Mois", "Nombre d'article vendu"],
+        ["Mois", ""],
         ...listVar
         
       ];
