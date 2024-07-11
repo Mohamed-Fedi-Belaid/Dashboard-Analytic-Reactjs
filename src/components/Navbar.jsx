@@ -59,8 +59,11 @@ export default function Navbar({ handleSdate, handleEdate,sdate,edate }) {
 
                     {/* Move DatePicker to the left */}
                     <Toolbar sx={{ marginLeft: "auto" }}>
+<<<<<<< HEAD
                         Du 
 
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                         <DatePicker
                             selected={new Date(sdate)}
                             onChange={(date) => handleSdate(date)}
@@ -70,8 +73,11 @@ export default function Navbar({ handleSdate, handleEdate,sdate,edate }) {
                             dropdownMode="select"
                             style={{ marginLeft: "10px" }} // Adjust left margin as needed
                         />
+<<<<<<< HEAD
                         Au
 
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                         <DatePicker
                             selected={new Date(edate)}
                             onChange={(date) => handleEdate(date)}

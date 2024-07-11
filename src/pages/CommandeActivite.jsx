@@ -28,6 +28,7 @@ export default function CommandeActivite() {
  
 
   const [dataNbTotalCommandeValide, setDataNbTotalCommandeValide] = useState(null);
+<<<<<<< HEAD
 
   const getInitialStartDate = () => {
     const savedStartDate = localStorage.getItem('startDate');
@@ -51,6 +52,10 @@ export default function CommandeActivite() {
       localStorage.setItem('endDate', endDate);
   }, [endDate]);
 
+=======
+  const [startDate, setStartDate] = useState(new Date().toISOString());
+  const [endDate, setEndDate] = useState(new Date().toISOString());
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
 
   useEffect(() => {
     const fetchData = async () => {
@@ -197,6 +202,7 @@ export default function CommandeActivite() {
   }, [, startDate, endDate]);
 
   const handleSetStartDate = (date) => {
+<<<<<<< HEAD
     const mdate = date.toString().split(' ');
     const newDate = `${mdate[1]} ${mdate[2]} ${mdate[3]}`;
     const creDate = new Date(newDate);
@@ -213,6 +219,21 @@ const handleSetEndDate = (date) => {
     setEndDate(formattedDate);
     console.log(formattedDate);
 };
+=======
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setStartDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+  };
+  const handleSetEndDate = (date) => {
+      const mdate = date.toString().split(" ");
+      const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+      const creDate = new Date(newDate);
+      setEndDate(creDate.toISOString().substring(0, 10));
+      console.log(creDate.toISOString().substring(0, 10));
+  };
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
   
   return (
     <>

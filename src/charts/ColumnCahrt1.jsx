@@ -40,6 +40,7 @@ export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
   };
 
   return (
+<<<<<<< HEAD
     dataRepartitionArticleParSousCategorie && (
       <div style={{ width: "98.5%" }}>
         <Chart
@@ -51,5 +52,14 @@ export function ColumnChart1({ dataRepartitionArticleParSousCategorie = [] }) {
         />
       </div>
     )
+=======
+    dataRepartitionArticleParSousCategorie && <Chart
+      chartType="ColumnChart"
+      width="1000px"
+      height="300px"
+      data={data}
+      options={options}
+    />
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
   );
 }

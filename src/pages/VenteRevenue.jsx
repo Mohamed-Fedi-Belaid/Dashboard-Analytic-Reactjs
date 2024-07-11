@@ -32,6 +32,7 @@ import { TableTauxRetention } from "../charts/TableTauxRetention";
 import { TableTauxConversion } from "../charts/TableTauxConversion";
 export default function VenteRevenue() {
     const [dataProfit, setDataProfit] = useState(null);
+<<<<<<< HEAD
     
     // Retrieve values from local storage or set default values
     const getInitialStartDate = () => {
@@ -258,6 +259,192 @@ export default function VenteRevenue() {
         setEndDate(formattedDate);
         console.log(formattedDate);
     };
+=======
+    const [startDate, setStartDate] = useState(new Date().toISOString());
+    const [endDate, setEndDate] = useState(new Date().toISOString());
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                console.log(startDate);
+                console.log(endDate);
+                const responseProfit = await axios.get(
+                    "http://localhost:9000/api/v1/article/getProfit?startDate="+startDate+"&endDate="+endDate
+                );
+                console.log(responseProfit.data[0].profit);
+                setDataProfit(responseProfit.data[0].profit);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataNbTotalVente, setDataNbTotalVente] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseNbTotalVente = await axios.get(
+                    "http://localhost:9000/api/v1/commande/count?startDate="+startDate+"&endDate="+endDate
+                );
+                console.log(responseNbTotalVente);
+                setDataNbTotalVente(responseNbTotalVente.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataSommeTotalVente, setDataSommeTotalVente] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseSommeTotalVente = await axios.get(
+                    "http://localhost:9000/api/v1/commande/sum?startDate="+startDate+"&endDate="+endDate
+                );
+                console.log(responseSommeTotalVente);
+                setDataSommeTotalVente(responseSommeTotalVente.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataMoyennePanierParCommande, setDataMoyennePanierParCommande] =
+        useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseMoyennePanierParCommande = await axios.get(
+                    "http://localhost:9000/api/v1/commande/sumDividedByCountAll?startDate="+startDate+"&endDate="+endDate
+                );
+                console.log( "http://localhost:9000/api/v1/commande/sumDividedByCountAll?startDate="+startDate+"&endDate="+endDate);
+                console.log(responseMoyennePanierParCommande);
+                setDataMoyennePanierParCommande(
+                    responseMoyennePanierParCommande.data
+                );
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [
+        dataRepartitionArticleParSousCategorie,
+        setDataRepartitionArticleParSousCategorie,
+    ] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseRepartitionArticleParSousCategorie =
+                    await axios.get(
+                        "http://localhost:9000/api/v1/article/getRepartitionArticleParSousCategorie?startDate="+startDate+"&endDate="+endDate
+                    );
+
+                setDataRepartitionArticleParSousCategorie(
+                    responseRepartitionArticleParSousCategorie.data
+                );
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataSommeVenteParMois, setDataSommeVenteParMois] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseSommeVenteParMois = await axios.get(
+                    "http://localhost:9000/api/v1/detailCommande/getSommeVenteParMois?startDate="+startDate+"&endDate="+endDate
+                );
+
+                setDataSommeVenteParMois(responseSommeVenteParMois.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataSommeVenteParVille, setDataSommeVenteParVille] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseSommeVenteParVille = await axios.get(
+                    "http://localhost:9000/api/v1/detailCommande/getSommeVenteParVille"
+                );
+                console.log(responseSommeVenteParVille.data);
+
+                setDataSommeVenteParVille(responseSommeVenteParVille.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataCAGR, setDataCAGR] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseCAGR = await axios.get(
+                    "http://localhost:9000/api/v1/article/getCAGR"
+                );
+                console.log(responseCAGR.data);
+
+                setDataCAGR(responseCAGR.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+    const [dataCommandeCountByDayForLast3Years, setDataCommandeCountByDayForLast3Years] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseCommandeCountByDayForLast3Years = await axios.get(
+                    "http://localhost:9000/api/v1/commande/getCommandeCountByDayForLast3Years?startDate="+startDate+"&endDate="+endDate
+                );
+                console.log(responseCommandeCountByDayForLast3Years.data);
+
+                setDataCommandeCountByDayForLast3Years(responseCommandeCountByDayForLast3Years.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [, startDate, endDate]);
+
+
+    const handleSetStartDate = (date) => {
+        const mdate = date.toString().split(" ");
+        const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+        const creDate = new Date(newDate);
+        setStartDate(creDate.toISOString().substring(0, 10));
+        console.log(creDate.toISOString().substring(0, 10));
+    };
+    const handleSetEndDate = (date) => {
+        const mdate = date.toString().split(" ");
+        const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+        const creDate = new Date(newDate);
+        setEndDate(creDate.toISOString().substring(0, 10));
+        console.log(creDate.toISOString().substring(0, 10));
+    };
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
     return (
         <>
             <div className="bgcolor">
@@ -273,7 +460,11 @@ export default function VenteRevenue() {
                     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                         <Stack spacing={2}>
                             <Grid container spacing={2}>
+<<<<<<< HEAD
                                 <Grid item xs={3}>
+=======
+                                <Grid item xs={4}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                     <Stack spacing={2}>
                                         <Stack spacing={2} direction="row">
                                             <Card
@@ -281,7 +472,10 @@ export default function VenteRevenue() {
                                                     minWidth: 60 + "%",
                                                     height: 177,
                                                 }}
+<<<<<<< HEAD
                                                 className="gradient"
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                             >
                                                 <Stack spacing={2}>
                                                     <CardContent>
@@ -324,7 +518,10 @@ export default function VenteRevenue() {
                                                     minWidth: 60 + "%",
                                                     height: 177,
                                                 }}
+<<<<<<< HEAD
                                                  className="gradient"
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                             >
                                                 <Stack spacing={2}>
                                                     <CardContent>
@@ -365,6 +562,7 @@ export default function VenteRevenue() {
                                                     </CardContent>
                                                 </Stack>
                                             </Card>
+<<<<<<< HEAD
                                             <Card
                                                 sx={{
                                                     minWidth: 60 + "%",
@@ -410,6 +608,8 @@ export default function VenteRevenue() {
                                                     </CardContent>
                                                 </Stack>
                                             </Card>
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                         </Stack>
                                         <Stack spacing={2} direction="row">
                                             <Card
@@ -417,7 +617,10 @@ export default function VenteRevenue() {
                                                     minWidth: 60 + "%",
                                                     height: 177,
                                                 }}
+<<<<<<< HEAD
                                                  className="gradient"
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                             >
                                                 <Stack spacing={2}>
                                                     <CardContent>
@@ -463,7 +666,10 @@ export default function VenteRevenue() {
                                                     minWidth: 60 + "%",
                                                     height: 177,
                                                 }}
+<<<<<<< HEAD
                                                  className="gradient"
+=======
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                             >
                                                 <Stack spacing={2}>
                                                     <CardContent>
@@ -504,6 +710,7 @@ export default function VenteRevenue() {
                                                     </CardContent>
                                                 </Stack>
                                             </Card>
+<<<<<<< HEAD
                                             <Card
                                                 sx={{
                                                     minWidth: 60 + "%",
@@ -560,6 +767,18 @@ export default function VenteRevenue() {
                                         direction="row"
                                     >
                                         <Card sx={{ width: 800, height: 370 }}  >
+=======
+                                        </Stack>
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <Stack
+                                        spacing={6}
+                                        marginLeft={14}
+                                        direction="row"
+                                    >
+                                        <Card sx={{ width: 800, height: 370 }}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                             <Stack spacing={2}>
                                                 <CardContent>
                                                     <LineChart dataCommandeCountByDayForLast3Years={dataCommandeCountByDayForLast3Years} />
@@ -574,21 +793,33 @@ export default function VenteRevenue() {
 
                             <Grid container spacing={2} direction="row">
                                 <Grid item xs={4}>
+<<<<<<< HEAD
                                     <Card sx={{ height: 40 + "vh" }} >
+=======
+                                    <Card sx={{ height: 40 + "vh" }}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                         <CardContent>
                                             <Table1 dataCAGR={dataCAGR} />
                                         </CardContent>
                                     </Card>
                                 </Grid>
                                 <Grid item xs={4}>
+<<<<<<< HEAD
                                     <Card sx={{ height: 40 + "vh" }}  >
+=======
+                                    <Card sx={{ height: 40 + "vh" }}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                         <CardContent>
                                             <TableTauxConversion />
                                         </CardContent>
                                     </Card>
                                 </Grid>
                                 <Grid item xs={4}>
+<<<<<<< HEAD
                                     <Card sx={{ height: 40 + "vh" }}  >
+=======
+                                    <Card sx={{ height: 40 + "vh" }}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                         <CardContent>
                                             <TableTauxRetention />
                                         </CardContent>
@@ -596,7 +827,11 @@ export default function VenteRevenue() {
                                 </Grid>
                                 <Box height={20} />
                                 <Grid item xs={12}>
+<<<<<<< HEAD
                                     <Card sx={{ height: 60 + "vh" }}  >
+=======
+                                    <Card sx={{ height: 60 + "vh" }}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                         <CardContent>
                                             <Bar2
                                                 dataSommeVenteParMois={
@@ -609,7 +844,11 @@ export default function VenteRevenue() {
                             </Grid>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
+<<<<<<< HEAD
                                     <Card sx={{ height: 60 + "vh" }}  >
+=======
+                                    <Card sx={{ height: 60 + "vh" }}>
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
                                         <ColumnChart1
                                             dataRepartitionArticleParSousCategorie={
                                                 dataRepartitionArticleParSousCategorie

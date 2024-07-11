@@ -37,7 +37,11 @@ export const data = [
 
 export const options = {
   chart: {
+<<<<<<< HEAD
     title: "Evolution des commandes au cours du temps",
+=======
+    title: "Evolution des commande au cours du temps",
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
     
   },
 };
@@ -67,7 +71,11 @@ export function LineChart({ dataCommandeCountByDayForLast3Years = [] }) {
   
     const data = [
     
+<<<<<<< HEAD
         ["Year", ""],
+=======
+        ["Year", "ventes"],
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
         ...listVar
         
       ];

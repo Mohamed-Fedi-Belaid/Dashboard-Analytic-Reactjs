@@ -30,6 +30,7 @@ import { TableFournisseur } from "../charts/TableFournisseur";
 
 export default function InventairePoduit() {
   const [dataProfit, setDataProfit] = useState(null);
+<<<<<<< HEAD
   
 
   const getInitialStartDate = () => {
@@ -54,6 +55,10 @@ useEffect(() => {
     localStorage.setItem('endDate', endDate);
 }, [endDate]);
 
+=======
+  const [startDate, setStartDate] = useState(new Date().toISOString());
+  const [endDate, setEndDate] = useState(new Date().toISOString());
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -230,6 +235,7 @@ useEffect(() => {
     fetchData();
   }, [, startDate, endDate]);
   
+<<<<<<< HEAD
 
    const handleSetStartDate = (date) => {
         const mdate = date.toString().split(' ');
@@ -248,6 +254,22 @@ useEffect(() => {
         setEndDate(formattedDate);
         console.log(formattedDate);
     };
+=======
+  const handleSetStartDate = (date) => {
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setStartDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+  };
+  const handleSetEndDate = (date) => {
+    const mdate = date.toString().split(" ");
+    const newDate = mdate[1] + " " + mdate[2] + " " + mdate[3];
+    const creDate = new Date(newDate);
+    setEndDate(creDate.toISOString().substring(0, 10));
+    console.log(creDate.toISOString().substring(0, 10));
+  };
+>>>>>>> d49360550675342ad915ae6e07a60f4f395f76bd
 
   return (
     <>
